@@ -173,6 +173,7 @@ RUN mv /root/.agoric/data/priv_validator_state.json /root/.agoric/priv_validator
 RUN rm -rf /root/.agoric/data/*
 RUN mv /root/.agoric/priv_validator_state.json /root/.agoric/data/priv_validator_state.json
 RUN rm /root/.agoric/config/genesis.json
+RUN rm -rf /root/.agoric/config/swing-store
 RUN mv /root/.agoric/export/* /root/.agoric/config/
 
 WORKDIR /usr/src/upgrade-test-scripts
