@@ -1,0 +1,17 @@
+{
+  "name": "upgrade-wallet-factory",
+  "script": "upgrade-wallet-factory.js",
+  "permit": "upgrade-wallet-factory-permit.json",
+  "bundles": [
+    {
+      "entrypoint": "@agoric/smart-wallet/src/walletFactory.js",
+      "bundleID": "b1-4f2c2da7eabc8ba13b4bc757e57e9c9c61952a0ecf58ab1c4de8056bd221c08827537e5157edc4dd69c1a1ab430ee1fe2814b5f42e9f448a10e22e768cffb748",
+      "fileName": "/Users/chris/.agoric/cache/b1-4f2c2da7eabc8ba13b4bc757e57e9c9c61952a0ecf58ab1c4de8056bd221c08827537e5157edc4dd69c1a1ab430ee1fe2814b5f42e9f448a10e22e768cffb748.json"
+    },
+    {
+      "entrypoint": "@agoric/smart-wallet/src/proposals/upgrade-wallet-factory2-proposal.js",
+      "bundleID": "b1-365f4260de707b58daa80f98feec9632c7cdafee80fc56a84d8d9f6327441c11305964c10687553a0abbc5ae9f1b891db5bc319f3fe995203c92fcee228790c0",
+      "fileName": "/Users/chris/.agoric/cache/b1-365f4260de707b58daa80f98feec9632c7cdafee80fc56a84d8d9f6327441c11305964c10687553a0abbc5ae9f1b891db5bc319f3fe995203c92fcee228790c0.json"
+    }
+  ]
+}
