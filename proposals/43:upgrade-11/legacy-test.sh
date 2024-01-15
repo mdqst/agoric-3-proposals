@@ -10,10 +10,7 @@ test_val "$(compare_swing_store_export_data $EXPORT_DIR)" "match" "swing-store c
 
 TMP_GENESIS_DIR=$EXPORT_DIR/genesis-export
 cp $HOME/.agoric/config/genesis.json $TMP_GENESIS_DIR/old_genesis.json
-cp $HOME/.agoric/data/priv_validator_state.json $TMP_GENESIS_DIR/priv_validator_state.json
-rm -rf $HOME/.agoric/data
-mkdir $HOME/.agoric/data
-mv $TMP_GENESIS_DIR/priv_validator_state.json $HOME/.agoric/data
+agd tendermint unsafe-reset-all
 mv $TMP_GENESIS_DIR/* $HOME/.agoric/config/
-startAgd
 rm -rf $EXPORT_DIR
+startAgd
