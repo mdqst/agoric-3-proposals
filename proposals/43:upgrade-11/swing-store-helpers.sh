@@ -73,34 +73,3 @@ compare_swing_store_export_data() {
     echo "mismatch"
   }
 }
-
-# hacky restore of pruned artifacts
-killAgd
-EXPORT_DIR=$(mktemp -t -d swing-store-export-upgrade-11-XXX)
-WITHOUT_GENESIS_EXPORT=1 make_swing_store_snapshot $EXPORT_DIR --artifact-mode debug || fail "Couldn't make swing-store snapshot"
-HISTORICAL_ARTIFACTS="$(
-  cd $HOME/.agoric/data/agoric/swing-store-historical-artifacts/
-  for i in *; do echo -n "[\"$i\",\"$i\"],"; done
-)"
-mv -n $HOME/.agoric/data/agoric/swing-store-historical-artifacts/* $EXPORT_DIR || fail "some historical artifacts not pruned"
-mv $EXPORT_DIR/export-manifest.json $EXPORT_DIR/export-manifest-original.json
-cat $EXPORT_DIR/export-manifest-original.json | jq -r ".artifacts = .artifacts + [${HISTORICAL_ARTIFACTS%%,}] | del(.artifactMode)" >$EXPORT_DIR/export-manifest.json
-restore_swing_store_snapshot $EXPORT_DIR || fail "Couldn't restore swing-store snapshot"
-startAgd
-rm -rf $EXPORT_DIR
-
-# verify swing-store export-data is consistent and perform genesis style "upgrade"
-killAgd
-EXPORT_DIR=$(mktemp -t -d swing-store-export-upgrade-11-XXX)
-make_swing_store_snapshot $EXPORT_DIR --artifact-mode none || fail "Couldn't make swing-store snapshot"
-test_val "$(compare_swing_store_export_data $EXPORT_DIR)" "match" "swing-store consistent cosmos kvstore"
-
-TMP_GENESIS_DIR=$EXPORT_DIR/genesis-export
-cp $HOME/.agoric/config/genesis.json $TMP_GENESIS_DIR/old_genesis.json
-cp $HOME/.agoric/data/priv_validator_state.json $TMP_GENESIS_DIR/priv_validator_state.json
-rm -rf $HOME/.agoric/data
-mkdir $HOME/.agoric/data
-mv $TMP_GENESIS_DIR/priv_validator_state.json $HOME/.agoric/data
-mv $TMP_GENESIS_DIR/* $HOME/.agoric/config/
-startAgd
-rm -rf $EXPORT_DIR
