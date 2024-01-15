@@ -11,4 +11,4 @@ yarn ava pre.test.js
 
 ./performActions.js
 
-./legacy.sh
+./legacy-actions.sh
