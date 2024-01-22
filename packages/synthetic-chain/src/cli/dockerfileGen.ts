@@ -9,6 +9,7 @@ import {
   type SoftwareUpgradeProposal,
   encodeUpgradeInfo,
   imageNameForProposal,
+  ParameterChangeProposal,
 } from './proposals.js';
 
 /**
@@ -96,7 +97,10 @@ RUN ./start_to_to.sh
    * - Run the core-eval scripts from the proposal. They are only guaranteed to have started, not completed.
    */
   EVAL(
-    { proposalIdentifier, proposalName }: CoreEvalProposal,
+    {
+      proposalIdentifier,
+      proposalName,
+    }: CoreEvalProposal | ParameterChangeProposal,
     lastProposal: ProposalInfo,
   ) {
     return `
@@ -226,7 +230,10 @@ export function writeDockerfile(
       `#----------------\n# ${proposal.proposalName}\n#----------------`,
     );
 
-    if (proposal.type === '/agoric.swingset.CoreEvalProposal') {
+    if (
+      proposal.type === '/agoric.swingset.CoreEvalProposal' ||
+      proposal.type === '/cosmos.params.v1beta1.ParameterChangeProposal'
+    ) {
       blocks.push(stage.EVAL(proposal, previousProposal!));
     } else if (proposal.type === 'Software Upgrade Proposal') {
       // handle the first proposal specially
