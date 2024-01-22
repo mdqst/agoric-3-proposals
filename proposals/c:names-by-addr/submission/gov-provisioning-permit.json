@@ -1,0 +1,20 @@
+{
+  "consume": {
+    "vatStore": true,
+    "vatAdminSvc": "makeCoreProposalBehavior",
+    "agoricNamesAdmin": "makeCoreProposalBehavior",
+    "zoe": "makeCoreProposalBehavior"
+  },
+  "produce": {
+    "namesByAddress": true
+  },
+  "evaluateBundleCap": "makeCoreProposalBehavior",
+  "installation": {
+    "produce": "makeCoreProposalBehavior"
+  },
+  "modules": {
+    "utils": {
+      "runModuleBehaviors": "makeCoreProposalBehavior"
+    }
+  }
+}
