@@ -1,6 +1,8 @@
 {
     "agoricProposal": {
-        "type": "/agoric.swingset.CoreEvalProposal"
+        "type": "/agoric.swingset.CoreEvalProposal",
+        "TODO-source": "build",
+        "TODO-buildScript": "XXX,"
     },
     "type": "module",
     "license": "Apache-2.0",
