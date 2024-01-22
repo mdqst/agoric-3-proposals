@@ -1,0 +1,17 @@
+{
+    "agoricProposal": {
+        "type": "/cosmos.params.v1beta1.ParameterChangeProposal"
+    },
+    "type": "module",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "@agoric/synthetic-chain": "^0.0.1-rc0"
+    },
+    "scripts": {
+        "agops": "yarn --cwd /usr/src/agoric-sdk/ --silent agops"
+    },
+    "ava": {
+        "timeout": "30s"
+    },
+    "packageManager": "yarn@4.0.2"
+}
