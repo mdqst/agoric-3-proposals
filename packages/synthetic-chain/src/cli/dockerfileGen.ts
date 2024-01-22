@@ -236,6 +236,8 @@ export function writeDockerfile(
         blocks.push(stage.START(proposal.proposalName, proposal.planName));
       }
       blocks.push(stage.EXECUTE(proposal));
+    } else {
+      throw Error(proposal.type);
     }
 
     // The stages must be output in dependency order because if the builder finds a FROM
