@@ -9,6 +9,7 @@ import {
   type SoftwareUpgradeProposal,
   encodeUpgradeInfo,
   imageNameForProposal,
+  isPassed,
 } from './proposals.js';
 
 /**
@@ -247,7 +248,7 @@ export function writeDockerfile(
     previousProposal = proposal;
   }
   // If one of the proposals is a passed proposal, make the latest one the default entrypoint
-  const lastPassed = lastPassedProposal(allProposals);
+  const lastPassed = allProposals.findLast(isPassed);
   if (lastPassed) {
     blocks.push(stage.DEFAULT(lastPassed));
   }
