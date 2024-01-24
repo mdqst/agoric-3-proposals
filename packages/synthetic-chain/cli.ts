@@ -57,6 +57,8 @@ const prepareDockerBuild = () => {
   writeDockerfile(allProposals, buildConfig.fromTag);
   writeBakefileProposals(allProposals);
   buildProposalSubmissions(proposals);
+  // to aid debugging CI out of disk space
+  execSync('df -h');
 };
 
 switch (cmd) {
