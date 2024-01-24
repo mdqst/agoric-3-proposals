@@ -64,7 +64,6 @@ export async function saveProposalContents(proposal: ProposalInfo) {
   assert.equal(data.proposal_id, proposal.proposalIdentifier);
   assert.equal(data.content['@type'], proposal.type);
   assert.equal(data.status, 'PROPOSAL_STATUS_PASSED');
-  console.log(data.content);
   switch (proposal.type) {
     case '/agoric.swingset.CoreEvalProposal':
       const { evals } = data.content;
@@ -95,6 +94,21 @@ export async function saveProposalContents(proposal: ProposalInfo) {
         const bundleIds = js_code.match(/b1-[a-z0-9]+/g);
         console.log(bundleIds);
       }
+      break;
+    case '/cosmos.params.v1beta1.ParameterChangeProposal':
+      const proposerRecord: { proposal_id: string; proposer: string } =
+        await agdArchive.query(['gov', 'proposer', proposal.proposalIdentifier]);
+      assert.equal(proposerRecord.proposal_id, proposal.proposalIdentifier);
+      const { proposer } = proposerRecord;
+      console.log(proposer);
+      const txHistory = await agdArchive.query([
+        'txs',
+        `--events=message.sender=${proposer}`,
+      ]);
+      console.log(txHistory);
+      break;
+    case 'Software Upgrade Proposal':
+      console.warn('Nothing to save for Software Upgrade Proposal');
       break;
   }
 }

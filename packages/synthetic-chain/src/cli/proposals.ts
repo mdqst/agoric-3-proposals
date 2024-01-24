@@ -27,7 +27,14 @@ export type CoreEvalProposal = ProposalCommon & {
       }
   );
 
-export type ProposalInfo = SoftwareUpgradeProposal | CoreEvalProposal;
+export type ParameterChangeProposal = ProposalCommon & {
+  type: '/cosmos.params.v1beta1.ParameterChangeProposal';
+};
+
+export type ProposalInfo =
+  | SoftwareUpgradeProposal
+  | CoreEvalProposal
+  | ParameterChangeProposal;
 
 function readInfo(proposalPath: string): ProposalInfo {
   const packageJsonPath = path.join('proposals', proposalPath, 'package.json');
