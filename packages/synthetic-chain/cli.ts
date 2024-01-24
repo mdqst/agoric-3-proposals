@@ -1,5 +1,6 @@
 #!/usr/bin/env tsx
 
+import assert from 'node:assert';
 import { execSync } from 'node:child_process';
 import path from 'node:path';
 import { parseArgs } from 'node:util';
@@ -8,6 +9,7 @@ import {
   buildProposalSubmissions,
   readBuildConfig,
 } from './src/cli/build.js';
+import { saveProposalContents } from './src/cli/chain.ts';
 import {
   writeBakefileProposals,
   writeDockerfile,
@@ -43,6 +45,8 @@ build           - build the synthetic-chain "use" images
 
 test [--debug]  - build the "test" images and run them
 test -m <name>  - target a particular proposal by substring match
+
+save <id>       - query resources from the proposal on chain and save to disk
 
 doctor          - diagnostics and quick fixes
 `;
@@ -88,6 +92,13 @@ switch (cmd) {
         execSync('docker system df', { stdio: 'inherit' });
       }
     }
+    break;
+  case 'save':
+    const id = positionals[1];
+    assert(id, 'must specify id to save');
+    const proposal = proposals.find(p => p.proposalIdentifier === id);
+    assert(proposal, `proposal ${id} not found`);
+    saveProposalContents(proposal);
     break;
   case 'doctor':
     runDoctor(allProposals);
