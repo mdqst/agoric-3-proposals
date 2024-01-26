@@ -31,6 +31,7 @@ const allProposals = readProposals(root);
 
 const { match } = values;
 const proposals = match
+  // TODO match on proposal identifier too (or simply proposal path)
   ? allProposals.filter(p => p.proposalName.includes(match))
   : allProposals;
 
