@@ -2,7 +2,7 @@
   "agoricProposal": {
     "releaseNotes": "https://github.com/Agoric/agoric-sdk/releases/tag/agoric-upgrade-14-rc0",
     "sdkImageTag": "40",
-    "planName": "agoric-upgrade-14",
+    "planName": "agorictest-upgrade-14",
     "upgradeInfo": {},
     "type": "Software Upgrade Proposal"
   },
