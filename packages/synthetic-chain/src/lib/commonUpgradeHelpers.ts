@@ -4,6 +4,7 @@ import * as path from 'node:path';
 import { agd, agoric, agops } from './cliHelper.js';
 import { CHAINID, HOME, VALIDATORADDR } from './constants.js';
 
+import type { OfferSpec } from '@agoric/smart-wallet/src/offers.js';
 import assert from 'node:assert';
 
 type ERef<T> = T | Promise<T>;
@@ -123,11 +124,17 @@ export const calculateWalletState = async (addr: string) => {
 
 export const executeOffer = async (
   address: string,
-  offerPromise: ERef<string>,
+  offerJsonOrStringP: ERef<OfferSpec>,
 ) => {
   const offerPath = await mkTemp('agops.XXX');
-  const offer = await offerPromise;
-  await fsp.writeFile(offerPath, offer);
+  const offerJsonOrString = await offerJsonOrStringP;
+  const offerJson: OfferSpec =
+    typeof offerJsonOrString === 'string'
+      ? // this is going to be stringified again but this we we guarantee it's valid JSON
+        JSON.parse(offerJsonOrString)
+      : offerJsonOrString;
+
+  await fsp.writeFile(offerPath, JSON.stringify(offerJson));
 
   await agops.perf(
     'satisfaction',
