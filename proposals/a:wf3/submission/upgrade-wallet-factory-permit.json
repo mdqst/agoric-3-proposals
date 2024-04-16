@@ -1,5 +1,7 @@
 {
   "consume": {
+    "vatAdminSvc": "makeCoreProposalBehavior",
+    "vatStore": true,
     "walletFactoryStartResult": "walletFactoryStartResult",
     "provisionPoolStartResult": "provisionPoolStartResult",
     "chainStorage": "chainStorage",
@@ -7,7 +9,6 @@
     "bankManager": "bank",
     "namesByAddressAdmin": "provisioning",
     "agoricNamesAdmin": "makeCoreProposalBehavior",
-    "vatAdminSvc": "makeCoreProposalBehavior",
     "zoe": "makeCoreProposalBehavior"
   },
   "evaluateBundleCap": "makeCoreProposalBehavior",

@@ -5,13 +5,18 @@
   "bundles": [
     {
       "entrypoint": "@agoric/smart-wallet/src/walletFactory.js",
-      "bundleID": "b1-06be7edbf5d70a3f9e0d0b420a06e654d48af3c7b8c27cc07c8e907cca78fa9a758a38886e9f86f61e4669484cf3504bf1f267f69e1861c12bdd9d862dc36964",
-      "fileName": "/home/connolly/.agoric/cache/b1-06be7edbf5d70a3f9e0d0b420a06e654d48af3c7b8c27cc07c8e907cca78fa9a758a38886e9f86f61e4669484cf3504bf1f267f69e1861c12bdd9d862dc36964.json"
+      "bundleID": "b1-e56e466812a2c985542e06118ad4d7e71fec8d1f14ef47a0153e36b6fff0b33c18a7d01979114cbc28fb42148cc4b96085fbc0688d64eb6b3d673628f8f7913b",
+      "fileName": "/home/connolly/.agoric/cache/b1-e56e466812a2c985542e06118ad4d7e71fec8d1f14ef47a0153e36b6fff0b33c18a7d01979114cbc28fb42148cc4b96085fbc0688d64eb6b3d673628f8f7913b.json"
+    },
+    {
+      "entrypoint": "@agoric/zoe/src/contractFacet/vatRoot.js",
+      "bundleID": "b1-ed893426fdabd7ab8bff04dfa144fa5cb5ecdc0a7c6a520b25b109506cea68c87f91d8e5dc65ed954851f4bd454b5b6a2ff19fff131a538d910a951ef91c3a39",
+      "fileName": "/home/connolly/.agoric/cache/b1-ed893426fdabd7ab8bff04dfa144fa5cb5ecdc0a7c6a520b25b109506cea68c87f91d8e5dc65ed954851f4bd454b5b6a2ff19fff131a538d910a951ef91c3a39.json"
     },
     {
       "entrypoint": "@agoric/smart-wallet/src/proposals/upgrade-wallet-factory3-proposal.js",
-      "bundleID": "b1-114404c34b72ef97398f31aee8113a432d0209cbe8e29aaac43f0c984f5252544df6d1473f0f8e075e9df9a99cf00eaa55a1446966813e300db0db25e0bef281",
-      "fileName": "/home/connolly/.agoric/cache/b1-114404c34b72ef97398f31aee8113a432d0209cbe8e29aaac43f0c984f5252544df6d1473f0f8e075e9df9a99cf00eaa55a1446966813e300db0db25e0bef281.json"
+      "bundleID": "b1-06e51eb84b8f0a95b086334c60635277b1463cac84569a5ae58b4f11351a72ad6b9bc2f6656abae9b137123929e22500cf9d405b1fe1754a14a1dcffc528e298",
+      "fileName": "/home/connolly/.agoric/cache/b1-06e51eb84b8f0a95b086334c60635277b1463cac84569a5ae58b4f11351a72ad6b9bc2f6656abae9b137123929e22500cf9d405b1fe1754a14a1dcffc528e298.json"
     }
   ]
 }
