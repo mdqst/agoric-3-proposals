@@ -58,6 +58,7 @@ fi
 agd tx gov submit-proposal software-upgrade "$UPGRADE_TO" \
   --upgrade-height="$height" --upgrade-info="$info" \
   --title="Upgrade to ${UPGRADE_TO}" --description="upgrades" \
+  "${NO_VALIDATE_PROPOSAL:+--no-validate}" \
   ${SIGN_BROADCAST_OPTS="--missing-env-setup"}
 waitForBlock
 

@@ -7,6 +7,7 @@ import {
   imageNameForProposal,
   isPassed,
   ParameterChangeProposal,
+  UNRELEASED_UPGRADE,
 } from './proposals.js';
 import { Platform } from './build.js';
 
@@ -55,6 +56,7 @@ FROM ghcr.io/agoric/agoric-3-proposals:${fromTag} as use-${fromTag}
     { path, planName, proposalName, upgradeInfo }: SoftwareUpgradeProposal,
     lastProposal: ProposalInfo,
   ) {
+    const skipValidation = planName === UNRELEASED_UPGRADE;
     return `
 # PREPARE ${proposalName}
 
@@ -62,7 +64,7 @@ FROM ghcr.io/agoric/agoric-3-proposals:${fromTag} as use-${fromTag}
 FROM use-${lastProposal.proposalName} as prepare-${proposalName}
 ENV UPGRADE_TO=${planName} UPGRADE_INFO=${JSON.stringify(
       encodeUpgradeInfo(upgradeInfo),
-    )}
+    )} ${skipValidation ? 'NO_VALIDATE_PROPOSAL=true' : ''}
 
 COPY --link --chmod=755 ./proposals/${path} /usr/src/proposals/${path}
 COPY --link --chmod=755 ./upgrade-test-scripts/env_setup.sh ./upgrade-test-scripts/run_prepare.sh ./upgrade-test-scripts/start_to_to.sh /usr/src/upgrade-test-scripts/

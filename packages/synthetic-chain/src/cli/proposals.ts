@@ -4,19 +4,28 @@ import * as path from 'node:path';
 
 export const repository = 'ghcr.io/agoric/agoric-3-proposals';
 
+export const UNRELEASED_UPGRADE = 'UNRELEASED_UPGRADE';
+
 type ProposalCommon = {
   path: string; // in the proposals directory
   proposalName: string;
   proposalIdentifier: string;
 };
 
+/** When the planName is UNRELEASED_UPGRADE, validation will be disabled */
 export type SoftwareUpgradeProposal = ProposalCommon & {
   sdkImageTag: string;
-  planName: string;
   upgradeInfo?: unknown;
-  releaseNodes: string;
   type: 'Software Upgrade Proposal';
-};
+} & (
+    | {
+        planName: string;
+        releaseNotes: string;
+      }
+    | {
+        planName: typeof UNRELEASED_UPGRADE;
+      }
+  );
 
 export type CoreEvalProposal = ProposalCommon & {
   type: '/agoric.swingset.CoreEvalProposal';
