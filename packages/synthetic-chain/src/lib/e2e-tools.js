@@ -4,10 +4,10 @@ import { E, Far } from '@endo/far';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Nat } from '@endo/nat';
 import { flags, makeAgd } from './agd-lib.js';
-import { makeHttpClient, makeAPI } from './ui-kit-goals/makeHttpClient.js';
-import { dedup, makeQueryKit, poll } from './ui-kit-goals/queryKit.js';
+import { makeHttpClient, makeAPI } from './makeHttpClient.js';
+import { dedup, makeQueryKit, poll } from './queryKit.js';
 import { getBundleId } from './bundle-tools.js';
-import { makeVStorage } from './ui-kit-goals/batchQuery.js';
+import { makeVStorage } from './batchQuery.js';
 
 const BLD = '000000ubld';
 
@@ -230,7 +230,7 @@ export const provisionSmartWallet = async (
   /** @type {import('../test/wallet-tools.js').MockWallet['offers']} */
   const offers = Far('Offers', {
     executeOffer,
-    /** @param {string|number} offerId */
+    /** @param {string | number} offerId */
     tryExit: offerId => sendAction({ method: 'tryExitOffer', offerId }),
   });
 
@@ -251,10 +251,11 @@ export const provisionSmartWallet = async (
   const { stringify: lit } = JSON;
   /**
    * @returns {Promise<{
-   *   balances: Coins,
-   *   pagination:unknown}
-   * >}
-   * @typedef {{ denom: string, amount: string}[]} Coins
+   *   balances: Coins;
+   *   pagination: unknown;
+   * }>}
+   *
+   * @typedef {{ denom: string; amount: string }[]} Coins
    */
   const getCosmosBalances = () =>
     lcd.getJSON(`/cosmos/bank/v1beta1/balances/${address}`);
@@ -306,9 +307,13 @@ export const provisionSmartWallet = async (
  *   agd: import('./agd-lib.js').Agd;
  *   blockTool: BlockTool;
  *   validator?: string;
- *   chainId?: string
+ *   chainId?: string;
  * }} opts
- * @returns {Promise<{ proposal_id: string, voting_end_time: unknown, status: string }>}
+ * @returns {Promise<{
+ *   proposal_id: string;
+ *   voting_end_time: unknown;
+ *   status: string;
+ * }>}
  */
 const voteLatestProposalAndWait = async ({
   agd,
@@ -354,9 +359,9 @@ const voteLatestProposalAndWait = async ({
 /**
  * @param {Pick<import('ava').ExecutionContext, 'log' | 'is'>} t
  * @param {{
- *   evals: {permit: string, code: string}[]
- *   title: string,
- *   description: string,
+ *   evals: { permit: string; code: string }[];
+ *   title: string;
+ *   description: string;
  * }} info
  * @param {{
  *   agd: import('./agd-lib.js').Agd;
@@ -532,14 +537,13 @@ export const makeE2ETools = (
 
   /**
    * @param {{
-   *   name: string,
-   *   title?: string,
-   *   description?: string,
-   *   config?: unknown,
+   *   name: string;
+   *   title?: string;
+   *   description?: string;
+   *   config?: unknown;
    * } & {
-   *   behavior?: Function,
-   * } & ({ builderPath: string } | { entryFile: string })
-   * } info
+   *   behavior?: Function;
+   * } & ({ builderPath: string } | { entryFile: string })} info
    */
   const buildAndRunCoreEval = async info => {
     if ('builderPath' in info) {

@@ -2,9 +2,7 @@
   "name": "@agoric/synthetic-chain",
   "version": "0.0.10",
   "description": "Utilities to build a chain and test proposals atop it",
-  "bin": {
-    "synthetic-chain": "dist/cli/cli.js"
-  },
+  "bin": "dist/cli/cli.js",
   "main": "./dist/lib/index.js",
   "type": "module",
   "module": "./dist/lib/index.js",
@@ -22,6 +20,8 @@
     "node": "^18.19 || ^20.9"
   },
   "dependencies": {
+    "@endo/far": "^1.1.2",
+    "@endo/nat": "^5.0.7",
     "@endo/zip": "^1.0.1",
     "better-sqlite3": "^9.4.0",
     "chalk": "^5.3.0",

@@ -2,7 +2,7 @@ import { $ } from 'execa';
 import fsp from 'node:fs/promises';
 import * as path from 'node:path';
 import { agd, agoric, agops } from './cliHelper.js';
-import { CHAINID, HOME, VALIDATORADDR } from './constants.js';
+import { CHAINID, VALIDATORADDR } from './constants.js';
 
 const waitForBootstrap = async () => {
   const endpoint = 'localhost';
