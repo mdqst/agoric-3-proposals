@@ -2,6 +2,7 @@ import assert from 'node:assert';
 import { ExecFileSyncOptionsWithStringEncoding } from 'node:child_process';
 import { CHAINID, VALIDATORADDR } from './constants';
 import { agd } from './cliHelper';
+import { queryVstorage } from './vstorage';
 
 const { freeze } = Object;
 
@@ -140,4 +141,19 @@ export const bankSend = (addr: string, wanted: string) => {
   const noise = [...from, ...chain, ...testKeyring, '--yes'];
 
   return agd.tx('bank', 'send', VALIDATORADDR, addr, wanted, ...noise);
+};
+
+export const getInstanceBoardId = async (instanceName: string) => {
+  const instanceRec = await queryVstorage(`published.agoricNames.instance`);
+
+  const value = JSON.parse(instanceRec.value);
+  const body = JSON.parse(value.values.at(-1));
+
+  const feeds = JSON.parse(body.body.substring(1));
+
+  const key = Object.keys(feeds).find(k => feeds[k][0] === instanceName);
+  if (key) {
+    return body.slots[key];
+  }
+  return null;
 };
